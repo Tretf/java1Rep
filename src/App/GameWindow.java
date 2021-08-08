@@ -1,7 +1,11 @@
 package App;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GameWindow extends JFrame {
 
@@ -35,6 +39,19 @@ public class GameWindow extends JFrame {
     private JButton moveRightUp;
     private JButton moveLeftDown;
     private JButton moveRightDown;
+    //+
+    private JButton moveNot;
+
+    private BufferedImage pictureUP;
+    private BufferedImage pictureDown;
+    private BufferedImage pictureLeft;
+    private BufferedImage pictureRight;
+    private BufferedImage PictureLeftUP;
+    private BufferedImage pictureRightUP;
+    private BufferedImage pictureLeftDown;
+    private BufferedImage pictureRightDown;
+    private BufferedImage pictureCenter;
+    //-
 
     private JScrollPane containerForGameLog;
 
@@ -124,9 +141,46 @@ public class GameWindow extends JFrame {
 
     private void preparePlayerActions() throws IOException {
         playerActions= new JPanel();
+        playerActions.setLayout(new GridLayout(3,3));
+        pictureUP = ImageIO.read(GameWindow.class.getResourceAsStream("pictureUp.png"));
+        pictureDown = ImageIO.read(GameWindow.class.getResourceAsStream("pictureDown.png"));
+        pictureLeft = ImageIO.read(GameWindow.class.getResourceAsStream("pictureLeft.png"));
+        pictureRight = ImageIO.read(GameWindow.class.getResourceAsStream("pictureRight.png"));
+        PictureLeftUP = ImageIO.read(GameWindow.class.getResourceAsStream("PictureLeftUP.png"));
+        pictureRightUP = ImageIO.read(GameWindow.class.getResourceAsStream("pictureRightUP.png"));
+        pictureLeftDown = ImageIO.read(GameWindow.class.getResourceAsStream("pictureLeftDown.png"));
+        pictureRightDown = ImageIO.read(GameWindow.class.getResourceAsStream("pictureRightDown.png"));
+        pictureCenter = ImageIO.read(GameWindow.class.getResourceAsStream("pictureCenter.png"));
+
+        moveUp = new JButton(new ImageIcon(pictureUP));
+        moveDown = new JButton(new ImageIcon(pictureDown));
+        moveLeft = new JButton(new ImageIcon(pictureLeft));
+        moveRight = new JButton(new ImageIcon(pictureRight));
+        moveLeftUp = new JButton(new ImageIcon(PictureLeftUP));
+        moveRightUp = new JButton(new ImageIcon(pictureRightUP));
+        moveLeftDown = new JButton(new ImageIcon(pictureLeftDown));
+        moveRightDown = new JButton(new ImageIcon(pictureRightDown));
+        moveNot = new JButton(new ImageIcon(pictureCenter));
+
+        playerActions.add(moveLeftUp);
+        playerActions.add(moveUp);
+        playerActions.add(moveRightUp);
+        playerActions.add(moveLeft);
+        playerActions.add(moveNot);
+        playerActions.add(moveRight);
+        playerActions.add(moveLeftDown);
+        playerActions.add(moveDown);
+        playerActions.add(moveRightDown);
+
     }
 
     private void prepareGameActionsLog(){
+        containerForGameLog = new JScrollPane();
+        containerForGameLog.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        JScrollBar jScrollBar = new JScrollBar();
+        containerForGameLog.setVerticalScrollBar(jScrollBar);
+
+        containerForGameLog.add(new JLabel("== Action Logs =="));
 
     }
 
